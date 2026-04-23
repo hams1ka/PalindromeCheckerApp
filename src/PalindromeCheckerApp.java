@@ -261,3 +261,38 @@ class UseCase10PalindromeCheckerApp {
         }
     }
 }
+// ============================================================
+// UC11: Object-Oriented Palindrome Service
+// Concepts: Encapsulation, Single Responsibility Principle, OOP
+// Data Structure: Internal (Stack / Array)
+// ============================================================
+class UseCase11PalindromeCheckerApp {
+    static class PalindromeChecker {
+        private String word;
+        public PalindromeChecker(String word) {
+            this.word = word;
+        }
+        public boolean checkPalindrome() {
+            Stack<Character> stack = new Stack<>();
+            for (char c : word.toCharArray()) {
+                stack.push(c);
+            }
+            String reversed = "";
+            while (!stack.isEmpty()) {
+                reversed += stack.pop();
+            }
+            return word.equals(reversed);
+        }
+        public String getWord() {
+            return word;
+        }
+    }
+    public static void main(String[] args) {
+        PalindromeChecker checker = new PalindromeChecker("deified");
+        if (checker.checkPalindrome()) {
+            System.out.println("\"" + checker.getWord() + "\" is a Palindrome. (OOP Encapsulation)");
+        } else {
+            System.out.println("\"" + checker.getWord() + "\" is NOT a Palindrome. (OOP Encapsulation)");
+        }
+    }
+}
