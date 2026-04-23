@@ -212,3 +212,24 @@ class UseCase8PalindromeCheckerApp {
         }
     }
 }
+// ============================================================
+// UC9: Recursive Palindrome Checker
+// Concepts: Recursion, base condition, call stack
+// Data Structure: Call Stack
+// ============================================================
+class UseCase9PalindromeCheckerApp {
+    static boolean isPalindrome(String s, int start, int end) {
+        if (start >= end) return true;
+        if (s.charAt(start) != s.charAt(end)) return false;
+        return isPalindrome(s, start + 1, end - 1);
+    }
+    public static void main(String[] args) {
+        String word = "refer";
+        boolean result = isPalindrome(word, 0, word.length() - 1);
+        if (result) {
+            System.out.println("\"" + word + "\" is a Palindrome. (Recursive Method)");
+        } else {
+            System.out.println("\"" + word + "\" is NOT a Palindrome. (Recursive Method)");
+        }
+    }
+}
