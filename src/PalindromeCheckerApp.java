@@ -3,12 +3,6 @@
 
 import java.util.*;
 
-// Use cases will be added here 
-// FILE: PalindromeCheckerApp.java
-// Base application setup
-
-import java.util.*;
-
 // ============================================================
 // UC1: Application Entry & Welcome Message
 // Concepts: class, main method, static keyword, System.out.println
@@ -132,6 +126,34 @@ class UseCase6PalindromeCheckerApp {
             System.out.println("\"" + word + "\" is a Palindrome. (Queue + Stack Method)");
         } else {
             System.out.println("\"" + word + "\" is NOT a Palindrome. (Queue + Stack Method)");
+        }
+    }
+}
+// ============================================================
+// UC7: Deque-Based Optimized Palindrome Checker
+// Concepts: Deque, front/rear access
+// Data Structure: Deque
+// ============================================================
+class UseCase7PalindromeCheckerApp {
+    public static void main(String[] args) {
+        String word = "radar";
+        Deque<Character> deque = new ArrayDeque<>();
+        for (char c : word.toCharArray()) {
+            deque.addLast(c);
+        }
+        boolean isPalindrome = true;
+        while (deque.size() > 1) {
+            char front = deque.removeFirst();
+            char rear  = deque.removeLast();
+            if (front != rear) {
+                isPalindrome = false;
+                break;
+            }
+        }
+        if (isPalindrome) {
+            System.out.println("\"" + word + "\" is a Palindrome. (Deque Method)");
+        } else {
+            System.out.println("\"" + word + "\" is NOT a Palindrome. (Deque Method)");
         }
     }
 }
