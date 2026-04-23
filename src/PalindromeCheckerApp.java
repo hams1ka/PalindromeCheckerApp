@@ -22,3 +22,19 @@ class UseCase1PalindromeCheckerApp {
         System.out.println("Application started successfully.");
     }
 }
+// ============================================================
+// UC2: Print a Hardcoded Palindrome Result
+// Concepts: String, String literal, if-else, console output
+// Data Structure: String
+// ============================================================
+class UseCase2PalindromeCheckerApp {
+    public static void main(String[] args) {
+        String word = "madam";
+        String reversed = new StringBuilder(word).reverse().toString();
+        if (word.equals(reversed)) {
+            System.out.println("\"" + word + "\" is a Palindrome.");
+        } else {
+            System.out.println("\"" + word + "\" is NOT a Palindrome.");
+        }
+    }
+}
