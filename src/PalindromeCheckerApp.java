@@ -157,3 +157,58 @@ class UseCase7PalindromeCheckerApp {
         }
     }
 }
+// ============================================================
+// UC8: Linked List Based Palindrome Checker
+// Concepts: Singly Linked List, fast/slow pointer, in-place reversal
+// Data Structure: Singly Linked List
+// ============================================================
+class UseCase8PalindromeCheckerApp {
+    static class Node {
+        char data;
+        Node next;
+        Node(char data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+    public static void main(String[] args) {
+        String word = "madam";
+        Node head = null, tail = null;
+        for (char c : word.toCharArray()) {
+            Node newNode = new Node(c);
+            if (head == null) {
+                head = tail = newNode;
+            } else {
+                tail.next = newNode;
+                tail = newNode;
+            }
+        }
+        Node slow = head, fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        Node prev = null, curr = slow;
+        while (curr != null) {
+            Node nextNode = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextNode;
+        }
+        Node left = head, right = prev;
+        boolean isPalindrome = true;
+        while (right != null) {
+            if (left.data != right.data) {
+                isPalindrome = false;
+                break;
+            }
+            left = left.next;
+            right = right.next;
+        }
+        if (isPalindrome) {
+            System.out.println("\"" + word + "\" is a Palindrome. (Linked List Method)");
+        } else {
+            System.out.println("\"" + word + "\" is NOT a Palindrome. (Linked List Method)");
+        }
+    }
+}
