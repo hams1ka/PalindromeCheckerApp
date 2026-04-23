@@ -296,3 +296,48 @@ class UseCase11PalindromeCheckerApp {
         }
     }
 }
+// ============================================================
+// UC12: Strategy Pattern for Palindrome Algorithms
+// Concepts: Interface, Polymorphism, Strategy Design Pattern
+// Data Structure: Varies per strategy
+// ============================================================
+class UseCase12PalindromeCheckerApp {
+    interface PalindromeStrategy {
+        boolean check(String word);
+    }
+    static class StackStrategy implements PalindromeStrategy {
+        public boolean check(String word) {
+            Stack<Character> stack = new Stack<>();
+            for (char c : word.toCharArray()) stack.push(c);
+            String reversed = "";
+            while (!stack.isEmpty()) reversed += stack.pop();
+            return word.equals(reversed);
+        }
+    }
+    static class DequeStrategy implements PalindromeStrategy {
+        public boolean check(String word) {
+            Deque<Character> deque = new ArrayDeque<>();
+            for (char c : word.toCharArray()) deque.addLast(c);
+            while (deque.size() > 1) {
+                if (!deque.removeFirst().equals(deque.removeLast())) return false;
+            }
+            return true;
+        }
+    }
+    static class PalindromeContext {
+        private PalindromeStrategy strategy;
+        public PalindromeContext(PalindromeStrategy strategy) {
+            this.strategy = strategy;
+        }
+        public boolean execute(String word) {
+            return strategy.check(word);
+        }
+    }
+    public static void main(String[] args) {
+        String word = "rotator";
+        PalindromeContext ctx1 = new PalindromeContext(new StackStrategy());
+        System.out.println("[Stack Strategy] \"" + word + "\" -> " + (ctx1.execute(word) ? "Palindrome" : "Not Palindrome"));
+        PalindromeContext ctx2 = new PalindromeContext(new DequeStrategy());
+        System.out.println("[Deque Strategy] \"" + word + "\" -> " + (ctx2.execute(word) ? "Palindrome" : "Not Palindrome"));
+    }
+}
