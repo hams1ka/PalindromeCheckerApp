@@ -107,3 +107,31 @@ class UseCase5PalindromeCheckerApp {
         }
     }
 }
+// ============================================================
+// UC6: Queue + Stack Based Palindrome Check
+// Concepts: Queue (FIFO), Stack (LIFO), enqueue, dequeue
+// Data Structures: Queue, Stack
+// ============================================================
+class UseCase6PalindromeCheckerApp {
+    public static void main(String[] args) {
+        String word = "civic";
+        Queue<Character> queue = new LinkedList<>();
+        Stack<Character> stack = new Stack<>();
+        for (char c : word.toCharArray()) {
+            queue.add(c);
+            stack.push(c);
+        }
+        boolean isPalindrome = true;
+        while (!queue.isEmpty()) {
+            if (!queue.poll().equals(stack.pop())) {
+                isPalindrome = false;
+                break;
+            }
+        }
+        if (isPalindrome) {
+            System.out.println("\"" + word + "\" is a Palindrome. (Queue + Stack Method)");
+        } else {
+            System.out.println("\"" + word + "\" is NOT a Palindrome. (Queue + Stack Method)");
+        }
+    }
+}
