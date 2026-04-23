@@ -38,3 +38,22 @@ class UseCase2PalindromeCheckerApp {
         }
     }
 }
+// ============================================================
+// UC3: Palindrome Check Using String Reverse (Manual Loop)
+// Concepts: for loop, String immutability, concatenation, equals()
+// Data Structure: String
+// ============================================================
+class UseCase3PalindromeCheckerApp {
+    public static void main(String[] args) {
+        String word = "racecar";
+        String reversed = "";
+        for (int i = word.length() - 1; i >= 0; i--) {
+            reversed = reversed + word.charAt(i);
+        }
+        if (word.equals(reversed)) {
+            System.out.println("\"" + word + "\" is a Palindrome. (String Reverse Method)");
+        } else {
+            System.out.println("\"" + word + "\" is NOT a Palindrome. (String Reverse Method)");
+        }
+    }
+}
