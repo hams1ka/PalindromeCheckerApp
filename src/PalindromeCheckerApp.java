@@ -233,3 +233,31 @@ class UseCase9PalindromeCheckerApp {
         }
     }
 }
+// ============================================================
+// UC10: Case-Insensitive & Space-Ignored Palindrome
+// Concepts: String preprocessing, regular expressions
+// Data Structure: String / Array
+// ============================================================
+class UseCase10PalindromeCheckerApp {
+    public static void main(String[] args) {
+        String word = "A man a plan a canal Panama";
+        String normalized = word.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        int left = 0, right = normalized.length() - 1;
+        boolean isPalindrome = true;
+        while (left < right) {
+            if (normalized.charAt(left) != normalized.charAt(right)) {
+                isPalindrome = false;
+                break;
+            }
+            left++;
+            right--;
+        }
+        System.out.println("Original  : \"" + word + "\"");
+        System.out.println("Normalized: \"" + normalized + "\"");
+        if (isPalindrome) {
+            System.out.println("Result: It IS a Palindrome. (Case-Insensitive & Space-Ignored)");
+        } else {
+            System.out.println("Result: It is NOT a Palindrome. (Case-Insensitive & Space-Ignored)");
+        }
+    }
+}
