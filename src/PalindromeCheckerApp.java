@@ -84,3 +84,26 @@ class UseCase4PalindromeCheckerApp {
         }
     }
 }
+// ============================================================
+// UC5: Stack-Based Palindrome Checker
+// Concepts: Stack, push, pop, LIFO
+// Data Structure: Stack
+// ============================================================
+class UseCase5PalindromeCheckerApp {
+    public static void main(String[] args) {
+        String word = "noon";
+        Stack<Character> stack = new Stack<>();
+        for (char c : word.toCharArray()) {
+            stack.push(c);
+        }
+        String reversed = "";
+        while (!stack.isEmpty()) {
+            reversed = reversed + stack.pop();
+        }
+        if (word.equals(reversed)) {
+            System.out.println("\"" + word + "\" is a Palindrome. (Stack Method)");
+        } else {
+            System.out.println("\"" + word + "\" is NOT a Palindrome. (Stack Method)");
+        }
+    }
+}
