@@ -57,3 +57,30 @@ class UseCase3PalindromeCheckerApp {
         }
     }
 }
+// ============================================================
+// UC4: Character Array Based Palindrome Check
+// Concepts: char[], array indexing, two-pointer technique
+// Data Structure: char[]
+// ============================================================
+class UseCase4PalindromeCheckerApp {
+    public static void main(String[] args) {
+        String word = "level";
+        char[] chars = word.toCharArray();
+        int left = 0;
+        int right = chars.length - 1;
+        boolean isPalindrome = true;
+        while (left < right) {
+            if (chars[left] != chars[right]) {
+                isPalindrome = false;
+                break;
+            }
+            left++;
+            right--;
+        }
+        if (isPalindrome) {
+            System.out.println("\"" + word + "\" is a Palindrome. (Char Array / Two-Pointer)");
+        } else {
+            System.out.println("\"" + word + "\" is NOT a Palindrome. (Char Array / Two-Pointer)");
+        }
+    }
+}
