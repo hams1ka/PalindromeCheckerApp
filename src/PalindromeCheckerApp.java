@@ -341,3 +341,54 @@ class UseCase12PalindromeCheckerApp {
         System.out.println("[Deque Strategy] \"" + word + "\" -> " + (ctx2.execute(word) ? "Palindrome" : "Not Palindrome"));
     }
 }
+// ============================================================
+// UC13: Performance Comparison
+// Concepts: System.nanoTime(), algorithm benchmarking
+// ============================================================
+class UseCase13PalindromeCheckerApp {
+    static boolean stringReverse(String word) {
+        return word.equals(new StringBuilder(word).reverse().toString());
+    }
+    static boolean charArrayTwoPointer(String word) {
+        char[] c = word.toCharArray();
+        int l = 0, r = c.length - 1;
+        while (l < r) { if (c[l++] != c[r--]) return false; }
+        return true;
+    }
+    static boolean stackMethod(String word) {
+        Stack<Character> stack = new Stack<>();
+        for (char ch : word.toCharArray()) stack.push(ch);
+        String rev = "";
+        while (!stack.isEmpty()) rev += stack.pop();
+        return word.equals(rev);
+    }
+    static boolean dequeMethod(String word) {
+        Deque<Character> deque = new ArrayDeque<>();
+        for (char ch : word.toCharArray()) deque.addLast(ch);
+        while (deque.size() > 1) { if (!deque.removeFirst().equals(deque.removeLast())) return false; }
+        return true;
+    }
+    static boolean recursive(String s, int start, int end) {
+        if (start >= end) return true;
+        if (s.charAt(start) != s.charAt(end)) return false;
+        return recursive(s, start + 1, end - 1);
+    }
+    public static void main(String[] args) {
+        String word = "amanaplanacanalpanama";
+        System.out.println("Performance Comparison for: \"" + word + "\"");
+        System.out.println("=".repeat(55));
+        long start, end;
+        start = System.nanoTime(); stringReverse(word); end = System.nanoTime();
+        System.out.printf("%-30s : %d ns%n", "String Reverse (StringBuilder)", (end - start));
+        start = System.nanoTime(); charArrayTwoPointer(word); end = System.nanoTime();
+        System.out.printf("%-30s : %d ns%n", "Char Array Two-Pointer", (end - start));
+        start = System.nanoTime(); stackMethod(word); end = System.nanoTime();
+        System.out.printf("%-30s : %d ns%n", "Stack Method", (end - start));
+        start = System.nanoTime(); dequeMethod(word); end = System.nanoTime();
+        System.out.printf("%-30s : %d ns%n", "Deque Method", (end - start));
+        start = System.nanoTime(); recursive(word, 0, word.length() - 1); end = System.nanoTime();
+        System.out.printf("%-30s : %d ns%n", "Recursive Method", (end - start));
+        System.out.println("=".repeat(55));
+        System.out.println("Note: Lower ns = faster execution.");
+    }
+}
